@@ -399,196 +399,110 @@ function onlineRequest(request) {
 
                 <section>
                     <h3>Modules on Browsers</h3>
-                    <table>
-                        <tr>
-                            <td>
-                                <ul> The Problem
-                                    <li>Web sites are turning into Web apps</li>
-                                    <li>Code complexity grows as the site gets bigger</li>
-                                    <li>Developer wants discrete JS files/modules</li>
-                                    <li>Deployment wants optimized code in just one or a few HTTP calls</li>
-                                </ul>
-                            </td>
-                            <td>
-                                <ul> Solutions
-                                    <li>Some sort of #include/import/require over the wire</li>
-                                    <li>Ability to load nested dependencies</li>
-                                    <li>ease of use for developer but then backed by an optimization tool that helps deployment</li>
-                                </ul>
-                            </td>
-                        </tr>
-                    </table>
+                    <h5>The Problem</h5>
+                    <ul> 
+                        <li>Web sites are turning into Web apps</li>
+                        <li>No nested dependency support</li>
+                        <li>Code complexity grows as the site gets bigger</li>
+                        <li>Developer wants discrete JS files/modules</li>
+                        <li>Deployment wants optimized code in just one or a few HTTP calls</li>
+                    </ul>
                 </section>
 
+                <section>
+                    <h3>Modules on Browsers</h3>
+                    <h5>Goals</h5>
+                    <ul>
+                        <li>Some sort of #include/import/require over the wire</li>
+                        <li>Ability to load nested dependencies</li>
+                        <li>ease of use for developer but then backed by an optimization tool that helps deployment</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>Modules on Browsers</h3>
+                    <h2>Options</h2>
+                    <h5>AMD</h5>
+                        <pre>
+                            <code>
+    define(['jquery'] , function ($) {
+        return function () {};
+    }); 
+                            </code>
+                        </pre>
+                </section>
+
+                <section>
+                    <h5>CommonJS</h5>
+                        <pre>
+                            <code>
+    var $ = require('jquery');
+    exports.myExample = function () {}; 
+                            </code>
+                        </pre>
+                    </table>
+                    <p>As commonJS is used by Node.js, it gives a uniform way of handling modules</p>
+                </section>
+
+                <section>
+                    <h3>ES6 Module Loader</h3>
+                    <p>ES6 proposes a uniform module loader which can be used in both server side and client side. It primarily has two parts,</p>
+                    <ul>
+                        <li><b>Module Loader Syntax:</b> The way we write modules in our code with the newimport, export and module keywords</li>
+                        <li>
+                            <b>Module loader Engine:</b>
+                            The module loading pipeline instructing the JavaScript engine how to handle loading modules. It comprehensively specifies the entire loading algorithm through a module loader class. This module loader instance can then be provided as a global variable in the environment, called System in the browser, which can then be called directly allowing dynamic loads in the browser with System.import('module-name').
+                        </li>
+                    </ul>
+                </section>
                
-
-                <section data-transition="slide" data-background="#4d7e65" data-background-transition="zoom">
-                    <h2>Background Transitions</h2>
-                    <p>
-                        Different background transitions are available via the backgroundTransition option. This one's called "zoom".
-                    </p>
-                    <pre><code>Reveal.configure({ backgroundTransition: 'zoom' })</code></pre>
-                </section>
-
-                <section data-transition="slide" data-background="#b5533c" data-background-transition="zoom">
-                    <h2>Background Transitions</h2>
-                    <p>
-                        You can override background transitions per-slide.
-                    </p>
-                    <pre><code style="word-wrap: break-word;">&lt;section data-background-transition="zoom"&gt;</code></pre>
-                </section>
-
-                <section>
-                    <h2>Pretty Code</h2>
-                    <pre><code data-trim contenteditable>
-function linkify( selector ) {
-  if( supports3DTransforms ) {
-
-    var nodes = document.querySelectorAll( selector );
-
-    for( var i = 0, len = nodes.length; i &lt; len; i++ ) {
-      var node = nodes[i];
-
-      if( !node.className ) {
-        node.className += ' roll';
-      }
+               <section>
+                   <h3>ES Module: Named exports</h3>
+                   <pre><code>
+    //------ lib.js ------
+    export const sqrt = Math.sqrt;
+    export function square(x) {
+        return x * x;
     }
-  }
-}
-                    </code></pre>
-                    <p>Code syntax highlighting courtesy of <a href="http://softwaremaniacs.org/soft/highlight/en/description/">highlight.js</a>.</p>
-                </section>
+    export function diag(x, y) {
+        return sqrt(square(x) + square(y));
+    }
+    
+    //------ main.js ------
+    import { square, diag } from 'lib';
+    console.log(square(11)); // 121
+    console.log(diag(4, 3)); // 5
+                   </code></pre>
+               </section>
+
+               <section>
+                   <h3>ES Module: Default exports</h3>
+                   <pre><code>
+
+    //------ myFunc.js ------
+    export default function () { ... };
+    
+    //------ main1.js ------
+    import myFunc from 'myFunc';
+    myFunc();
+
+    // or
+
+    //------ MyClass.js ------
+    export default class { ... };
+    
+    //------ main2.js ------
+    import MyClass from 'MyClass';
+    let inst = new MyClass();
+                   </code></pre>
+               </section>
 
                 <section>
-                    <h2>Marvelous List</h2>
-                    <ul>
-                        <li>No order here</li>
-                        <li>Or here</li>
-                        <li>Or here</li>
-                        <li>Or here</li>
-                    </ul>
-                </section>
-
-                <section>
-                    <h2>Fantastic Ordered List</h2>
-                    <ol>
-                        <li>One is smaller than...</li>
-                        <li>Two is smaller than...</li>
-                        <li>Three!</li>
-                    </ol>
-                </section>
-
-                <section>
-                    <h2>Tabular Tables</h2>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Item</th>
-                                <th>Value</th>
-                                <th>Quantity</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Apples</td>
-                                <td>$1</td>
-                                <td>7</td>
-                            </tr>
-                            <tr>
-                                <td>Lemonade</td>
-                                <td>$2</td>
-                                <td>18</td>
-                            </tr>
-                            <tr>
-                                <td>Bread</td>
-                                <td>$3</td>
-                                <td>2</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </section>
-
-                <section>
-                    <h2>Clever Quotes</h2>
-                    <p>
-                        These guys come in two forms, inline: <q cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">
-                        &ldquo;The nice thing about standards is that there are so many to choose from&rdquo;</q> and block:
-                    </p>
-                    <blockquote cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">
-                        &ldquo;For years there has been a theory that millions of monkeys typing at random on millions of typewriters would
-                        reproduce the entire works of Shakespeare. The Internet has proven this theory to be untrue.&rdquo;
+                    <h2>Questions</h2>
+                    <blockquote>
+                        “Perfection is reached not when there is nothing more to add, but when there is nothing more to subtract.” <br/> ~ Antoine de Saint-Exupéry
                     </blockquote>
-                </section>
-
-                <section>
-                    <h2>Intergalactic Interconnections</h2>
-                    <p>
-                        You can link between slides internally,
-                        <a href="#/2/3">like this</a>.
-                    </p>
-                </section>
-
-                <section>
-                    <h2>Speaker View</h2>
-                    <p>There's a <a href="https://github.com/hakimel/reveal.js#speaker-notes">speaker view</a>. It includes a timer, preview of the upcoming slide as well as your speaker notes.</p>
-                    <p>Press the <em>S</em> key to try it out.</p>
-
-                    <aside class="notes">
-                        Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window (hit 's' on your keyboard).
-                    </aside>
-                </section>
-
-                <section>
-                    <h2>Export to PDF</h2>
-                    <p>Presentations can be <a href="https://github.com/hakimel/reveal.js#pdf-export">exported to PDF</a>, here's an example:</p>
-                    <iframe src="//www.slideshare.net/slideshow/embed_code/42840540" width="445" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:3px solid #666; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
-                </section>
-
-                <section>
-                    <h2>Global State</h2>
-                    <p>
-                        Set <code>data-state="something"</code> on a slide and <code>"something"</code>
-                        will be added as a class to the document element when the slide is open. This lets you
-                        apply broader style changes, like switching the page background.
-                    </p>
-                </section>
-
-                <section data-state="customevent">
-                    <h2>State Events</h2>
-                    <p>
-                        Additionally custom events can be triggered on a per slide basis by binding to the <code>data-state</code> name.
-                    </p>
-                    <pre><code class="javascript" data-trim contenteditable style="font-size: 18px;">
-Reveal.addEventListener( 'customevent', function() {
-    console.log( '"customevent" has fired' );
-} );
-                    </code></pre>
-                </section>
-
-                <section>
-                    <h2>Take a Moment</h2>
-                    <p>
-                        Press B or . on your keyboard to pause the presentation. This is helpful when you're on stage and want to take distracting slides off the screen.
-                    </p>
-                </section>
-
-                <section>
-                    <h2>Much more</h2>
-                    <ul>
-                        <li>Right-to-left support</li>
-                        <li><a href="https://github.com/hakimel/reveal.js#api">Extensive JavaScript API</a></li>
-                        <li><a href="https://github.com/hakimel/reveal.js#auto-sliding">Auto-progression</a></li>
-                        <li><a href="https://github.com/hakimel/reveal.js#parallax-background">Parallax backgrounds</a></li>
-                        <li><a href="https://github.com/hakimel/reveal.js#keyboard-bindings">Custom keyboard bindings</a></li>
-                    </ul>
-                </section>
-
-                <section style="text-align: left;">
-                    <h1>THE END</h1>
-                    <p>
-                        - <a href="http://slides.com">Try the online editor</a> <br>
-                        - <a href="https://github.com/hakimel/reveal.js">Source code &amp; documentation</a>
-                    </p>
+                    <img src="images/gifs/ask.gif" height="140%" alt="">
                 </section>
 
             </div>
