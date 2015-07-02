@@ -99,6 +99,10 @@
                 </section>
 
                 <section>
+                    <h1>Platform Improvements</h1>
+                </section>
+
+                <section>
                     <h3>Problems with HTTP/1.1</h3>
                     <ul>
                         <li>HTTP/1.1 was revised last in 1999</li>
@@ -497,12 +501,79 @@ function onlineRequest(request) {
                    </code></pre>
                </section>
 
+
+
+               <!-- Infrastucture Part -->
                 <section>
-                    <h2>Questions</h2>
+                    <h1>Infrastrucutre Improvements</h1>
+                </section>
+
+                <section>
                     <blockquote>
                         “Perfection is reached not when there is nothing more to add, but when there is nothing more to subtract.” <br/> ~ Antoine de Saint-Exupéry
                     </blockquote>
-                    <img src="images/gifs/ask.gif" height="140%" alt="">
+                    <img src="images/gifs/touch.gif" height="350px" alt="">
+                </section>
+
+                <section>
+                    <h3>The Rise of the Containers</h3>
+                    <h4><b>tl;dr:</b> containers are just like virtual machines. <br> but better.</h4>
+                </section>
+
+                <section>
+                    <h3>Architecture: Execution Model</h3>
+                    <img src="images/pics/containers.png" alt="">
+                </section>
+
+                <section>
+                    <h3>Dockerfile</h3>
+                    <pre>
+                        <code>
+    FROM node:latest
+
+    # Set in what directory commands will run
+    WORKDIR /home/app
+
+    # Put all our code inside that directory that lives in the container
+    ADD . /home/app
+
+    # Install dependencies
+    RUN \
+        npm install -g bower && \
+        npm install && \
+        bower install --config.interactive=false --allow-root
+
+    # Tell Docker we are going to use this port
+    EXPOSE 9000
+
+    # The command to run our app when the container is run
+    CMD ["node", "server/app.js"]
+
+                        </code>
+                    </pre>
+                </section>
+
+                <section>
+                    <h3>Architecture: Development Model</h3>
+                    <img src="images/pics/docker_diff.png" height="500px" alt="">
+                </section>
+
+                <section>
+                    <h3>Architecture: Implementations</h3>
+                    <img src="images/pics/lxc.png" height="500px" alt="">
+                </section>
+
+                <section>
+                    <h3>Docker and Git</h3>
+                     <img src="images/pics/git_docker.png" alt="">
+                </section>
+
+                 <section>
+                    <h2>Questions</h2>
+                    <blockquote>
+                        "Human knowledge belogs to the World!" <br/>~ Milo Hoffman (Antiturst)
+                    </blockquote>
+                    <img src="images/gifs/ask.gif" height="350px" alt="">
                 </section>
 
             </div>
